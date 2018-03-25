@@ -22,20 +22,29 @@ public class MainDriver {
         while (myData.hasNext()) {
             gasStationDistances.add(myData.nextInt());
         }
-        
-        /********************************************************************************************************
-        The ACTUAL PARAMETERS maxDistanceOnFullTank and gasStationDistances
-        are passed to the method gasStation(int,ArrayList). The variable maxDistanceOnFullTank is PASSED BY VALUE 
-        while the variable (the ArrayList) gasStationDistances is PASSED BY REFERENCE
-        -->what is actually passed here is the memory address of the first element of the ArrayList.
-        ********************************************************************************************************/
+
+        /**
+         * ******************************************************************************************************
+         * The ACTUAL PARAMETERS maxDistanceOnFullTank and gasStationDistances are passed to the method 
+         * gasStation(int,ArrayList). The variable maxDistanceOnFullTank is PASSED BY VALUE while the variable 
+         * (the ArrayList) gasStationDistances is PASSED BY REFERENCE -->what is actually passed here is the memory 
+         * address of the first element of the ArrayList. 
+         * ******************************************************************************************************
+         */
         System.out.println(RouteAnalysis(maxDistanceOnFullTank, distanceToFinalDest, gasStationDistances));
     }
 
-    /***************************************************************************************
-    The formal parameters listed here in function definition are maxDistance and gasStations
-    ****************************************************************************************/
-    public static int RouteAnalysis(int maxDistance, int finalDestination, ArrayList<Integer> gasStations) {
+    /**
+     * *************************************************************************************
+     * The formal parameters listed here in function definition are maxDistance and gasStations
+     *
+     * @param maxDistance
+     * @param finalDestination
+     * @param gasStations
+     * @return 
+     * **************************************************************************************
+     */
+    private static int RouteAnalysis(int maxDistance, int finalDestination, ArrayList<Integer> gasStations) {
 
         int numStops = 0;
         int max = maxDistance;
@@ -53,7 +62,7 @@ public class MainDriver {
         This process checks to see if there any consecutive gas stations that are separated by a distance
         greater than the maximum distance that the car can travel on a single fill-up. If such a gap
         is found, the trip is determined to be impossible. 
-        */
+         */
         int x = 0;
         while (x + 1 < gasStations.size()) {
             if (gasStations.get(x + 1) - gasStations.get(x) > max) {
@@ -61,7 +70,7 @@ public class MainDriver {
             }
             x++;
         }
-        
+
         /*
         By this point, the trip is assumed to be possible. With this process the car will stop at the gas station
         before the gas station who's distance from the car's current location is greater than the car can travel
@@ -76,7 +85,7 @@ public class MainDriver {
                 traveled. For instance, if the car travels from mile 0 to a gas station located at mile 290, and
                 the maximum distance that the car can travel is 400 miles, then from mile 290 the car can travel
                 to mile 690. 
-                */
+                 */
                 maxDistance += gasStations.get(i - 1);
                 numStops++;
             }
