@@ -51,7 +51,7 @@ public class MainDriver {
 
         /*
         If the distance between the last gas station and the destination is greater than the maximum
-        distance that the car can travel, the trip is considered impossible along this route and/or
+        distance that the car can travel, the trip is considered to be impossible along this route and/or
         in this car. 
          */
         if (finalDestination - gasStations.get(gasStations.size() - 1) > maxDistance) {
@@ -59,9 +59,9 @@ public class MainDriver {
         }
 
         /*
-        This process checks to see if there any consecutive gas stations that are separated by a distance
+        This process checks to see if there are any consecutive gas stations that are separated by a distance
         greater than the maximum distance that the car can travel on a single fill-up. If such a gap
-        is found, the trip is determined to be impossible. 
+        is found, the trip is considered to be impossible. 
          */
         int x = 0;
         while (x + 1 < gasStations.size()) {
@@ -73,7 +73,7 @@ public class MainDriver {
 
         /*
         By this point, the trip is assumed to be possible. With this process the car will stop at the gas station
-        before the gas station who's distance from the car's current location is greater than the car can travel
+        before the gas station whose distance from the car's current location is greater than the car can travel
         on a single fill-up. 
          */
         for (int i = 0; i < gasStations.size(); i++) {
@@ -93,9 +93,9 @@ public class MainDriver {
         }
 
         /*
-        This last process checks to see if there is enough gas in the car to get from the last gas station to
-        the destination. If not, then the driver should stop at the last gas station along the route before
-        proceeding to the final destination. 
+        This last process essentially checks to see if the distance between the last gas station where the driver stopped
+        and the final destination is greater than the maximum distance the car can travel. If it is, then the driver should
+        stop at the last gas station on the route to fill up before proceeding to the final destination. 
          */
         if (finalDestination - maxDistance > max) {
             maxDistance += gasStations.get(gasStations.size() - 1);
